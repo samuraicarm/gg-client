@@ -8,12 +8,12 @@ class Nav extends Component {
         <h3> Logo </h3>
         <ul className="nav-links">
           <Link style={navStyle} to="/Games">
-            <li> Games </li>
+            <li> Search Games </li>
           </Link>
         </ul>
         <ul className="nav-links">
           <Link style={navStyle} to="/Profile">
-            <li> Profile</li>
+            <li> My Games</li>
           </Link>
         </ul>
       </nav>

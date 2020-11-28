@@ -1,7 +1,7 @@
 import React from "react";
-import Nav from "./Nav/Nav.js";
-import Games from "./Games/Games.js";
-import Profile from "./Profile/Profile.js";
+import Nav from "./src/Nav/Nav.js";
+import Games from "./games/games";
+import Profile from "./src/Profile/Profile";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 const Header = () => {
@@ -10,7 +10,7 @@ const Header = () => {
       <Nav />
       <Switch>
         <Route path="/games" component={Games} />
-        <Route path="/myprofile" component={Profile} />
+        <Route path="/mygames" component={Profile} />
       </Switch>
     </header>
   );

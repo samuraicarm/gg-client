@@ -25,8 +25,8 @@ class Games extends Component {
       headers: {
         // Add your key after Bearer
         Accept: "application/json",
-        "Client-ID": "r1psyxnqb0ubhhlvmh132qdhastfj3",
-        Authorization: "Bearer access_token gpgwx53hphnvre7ydkwu0vgoifq59s",
+        "Client-ID": "",
+        Authorization: "",
       },
     };
 
