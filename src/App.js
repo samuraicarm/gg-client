@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import "./App.css";
 import SearchBar from "./SearchBar/SearchBar";
 import FilterableList from "./FilterableList/FilterableList";
+import Games from "./Games/Games";
 
 class App extends Component {
   constructor(props) {
@@ -26,6 +27,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        <Header />
         <SearchBar
           searchTerm={this.state.searchTerm}
           filterOption={this.state.filterOption}
@@ -37,6 +39,7 @@ class App extends Component {
           searchTerm={this.state.searchTerm}
           filterOption={this.state.filterOption}
         />
+        <Games />
       </div>
     );
   }

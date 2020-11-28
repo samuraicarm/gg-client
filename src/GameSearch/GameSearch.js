@@ -1,27 +1,14 @@
-import React, { Component } from "react";
-import "./App.css";
+import React from "react";
 
-import AddBookmark from "./addGame/addGame";
+const GameSearch = (props) => {
+  return (
+    <div className="search-area">
+      <form onSubmit={props.searchGame} action="">
+        <input onChange={props.handleSearch} type="text" />
+        <button type="submit">Search</button>
+      </form>
+    </div>
+  );
+};
 
-
-class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      games: [],
-      showAddForm: false,
-    };
-  }
-
-  render() {
-    const page = this.state.showAddForm ? (
-      <AddBookmark />
-    ) : (
-
-    );
-
-    return <div className="App">{page}</div>;
-  }
-}
-
-export default App;
+export default GameSearch;
