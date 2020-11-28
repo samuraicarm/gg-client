@@ -1,20 +1,22 @@
 import React, { Component } from "react";
-import { Link, withRouter } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 class Nav extends Component {
   render() {
     return (
       <nav>
-        <h3> Logo </h3>
+        <h3>
+          <Link to="/">Logo</Link>
+        </h3>
         <ul className="nav-links">
-          <Link style={navStyle} to="/Games">
-            <li> Search Games </li>
-          </Link>
+          <li> Search Games </li>
         </ul>
         <ul className="nav-links">
-          <Link style={navStyle} to="/Profile">
-            <li> My Games</li>
-          </Link>
+          <Link to="/SearchMyGames">My Games</Link>
+        </ul>
+
+        <ul className="nav-links">
+          <li> Sign in </li>
         </ul>
       </nav>
     );

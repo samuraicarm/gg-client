@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import SearchArea from "./SearchArea/SearchArea";
+import SearchArea from "../SearchArea/SearchArea";
 
 class Games extends Component {
   constructor(props) {

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import SearchBar from "src/SearchBar/SearchBar";
-import FilterableList from "./src/FilterableList/FilterableList";
+import SearchBar from "../SearchBar/SearchBar";
+import FilterableList from "../FilterableList/FilterableList";
 
 class SearchMyGames extends Component {
   constructor(props) {

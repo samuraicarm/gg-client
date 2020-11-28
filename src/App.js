@@ -1,14 +1,21 @@
 import React, { Component } from "react";
 import "./App.css";
-import Header from "./Header/Header.js";
 import LandingPage from "./LandingPage/LandingPage";
+import Nav from "./Nav/Nav";
+import SearchMyGames from "./Profile/SearchMyGames";
+import { Route, Switch } from "react-router-dom";
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <Header />
-        <LandingPage />
+        <Nav />
+        <main>
+          <Switch>
+            <Route exact path="/" component={LandingPage} />
+            <Route path="/SearchMyGames" component={SearchMyGames} />
+          </Switch>
+        </main>
       </div>
     );
   }

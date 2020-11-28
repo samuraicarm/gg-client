@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
+import { BrowserRouter } from "react-router-dom";
 
 const Games = [
   {
@@ -32,4 +33,9 @@ const Games = [
   },
 ];
 
-ReactDOM.render(<App games={Games} />, document.getElementById("root"));
+ReactDOM.render(
+  <BrowserRouter>
+    <App games={Games} />
+  </BrowserRouter>,
+  document.getElementById("root")
+);
