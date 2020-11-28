@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import GameSearch from "./GameSearch/GameSearch";
+import SearchArea from "./SearchArea/SearchArea";
 
 class Games extends Component {
   constructor(props) {
@@ -24,13 +24,11 @@ class Games extends Component {
       method: "GET",
       headers: {
         // Add your key after Bearer
-        "Accept": "application/json",
+        Accept: "application/json",
         "Client-ID": "r1psyxnqb0ubhhlvmh132qdhastfj3",
-        "Authorization": "Bearer access_token gpgwx53hphnvre7ydkwu0vgoifq59s",
+        Authorization: "Bearer access_token gpgwx53hphnvre7ydkwu0vgoifq59s",
       },
-      data: "name;"
-    })
-
+    };
 
     fetch(searchUrl, options)
       .then((res) => {
@@ -56,7 +54,7 @@ class Games extends Component {
   render() {
     return (
       <div>
-        <GameSearch
+        <SearchArea
           searchGame={this.searchGame}
           handleSearch={this.handleSearch}
         />

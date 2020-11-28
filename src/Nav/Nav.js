@@ -1,22 +1,24 @@
-import React from "react";
-import "./App.css";
+import React, { Component } from "react";
 import { Link, withRouter } from "react-router-dom";
 
-function Nav() {
-  const navStyle = {
-    color: "white",
-  };
-
-  return (
-    <nav>
-      <h3> Logo </h3>
-      <ul className="nav-links">
-        <Link style={navStyle} to="/games">
-          <li> Games </li>
-        </Link>
-      </ul>
-    </nav>
-  );
+class Nav extends Component {
+  render() {
+    return (
+      <nav>
+        <h3> Logo </h3>
+        <ul className="nav-links">
+          <Link style={navStyle} to="/Games">
+            <li> Games </li>
+          </Link>
+        </ul>
+        <ul className="nav-links">
+          <Link style={navStyle} to="/Profile">
+            <li> Profile</li>
+          </Link>
+        </ul>
+      </nav>
+    );
+  }
 }
 
 export default Nav;

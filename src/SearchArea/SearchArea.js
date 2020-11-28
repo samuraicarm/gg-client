@@ -1,6 +1,6 @@
 import React from "react";
 
-const GameSearch = (props) => {
+const SearchArea = (props) => {
   return (
     <div className="search-area">
       <form onSubmit={props.searchGame} action="">
@@ -11,4 +11,4 @@ const GameSearch = (props) => {
   );
 };
 
-export default GameSearch;
+export default SearchArea;
