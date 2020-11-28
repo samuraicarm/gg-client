@@ -1,17 +1,35 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.css";
+import App from "./App";
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+const Games = [
+  {
+    gameName: "Among Trees",
+    platform: "Steam",
+    dateAdded: "1 day ago",
+    status: "Want to Play",
+  },
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+  {
+    gameName: "What Remains of Edith Finch",
+    platform: "Switch",
+    dateAdded: "3 weeks go",
+    status: "Played",
+  },
+
+  {
+    gameName: "Zelda: Breath of the Wild",
+    platform: "Switch",
+    dateAdded: "1 year ago",
+    status: "Playing",
+  },
+  {
+    gameName: "The Gardens Between",
+    platform: "Switch",
+    dateAdded: "1 year ago",
+    status: "Playing",
+  },
+];
+
+ReactDOM.render(<App games={Games} />, document.getElementById("root"));
