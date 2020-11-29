@@ -16,7 +16,11 @@ class Nav extends Component {
         </ul>
 
         <ul className="nav-links">
-          <li> Sign in </li>
+          <Link to="/Login">Login</Link>
+        </ul>
+
+        <ul className="nav-links">
+          <Link to="/SignUp">Sign Up</Link>
         </ul>
       </nav>
     );
