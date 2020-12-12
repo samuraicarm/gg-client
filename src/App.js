@@ -17,18 +17,9 @@ function App() {
         <main>
           <Switch>
             <Route exact path="/" component={LandingPage} />
-
-            <Route path="/Played">
-              <Played />
-            </Route>
-
-            <Route path="/Playlist">
-              <Playlist />
-            </Route>
-
-            <Route path="/Add">
-              <Add />
-            </Route>
+            <Route path="/played" component={Played} />
+            <Route path="/add" component={Add} />
+            <Route path="/playlist" component={Playlist} />
           </Switch>
         </main>
       </div>

@@ -15,7 +15,7 @@ export const Add = () => {
       .then((res) => res.json())
       .then((data) => {
         if (!data.errors) {
-          setResults(data.results);
+          setResults(data);
         } else {
           setResults([]);
         }

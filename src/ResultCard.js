@@ -15,6 +15,9 @@ export const ResultCard = ({ data }) => {
         <h3 className="title">{data.game}</h3>
         <h3 className="console"> {data.console}</h3>
       </div>
+      <div className="controsl">
+        <button className="btn">Add to Play List</button>
+      </div>
     </div>
   );
 };
