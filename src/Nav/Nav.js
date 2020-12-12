@@ -5,22 +5,24 @@ class Nav extends Component {
   render() {
     return (
       <nav>
-        <h3>
-          <Link to="/">Logo</Link>
-        </h3>
-        <ul className="nav-links">
-          <li> Search Games </li>
-        </ul>
-        <ul className="nav-links">
-          <Link to="/SearchMyGames">My Games</Link>
-        </ul>
+        <ul className="navlinks">
+          <li className="logo">
+            <Link to="/">Logo</Link>
+          </li>
 
-        <ul className="nav-links">
-          <Link to="/Login">Login</Link>
-        </ul>
+          <li className="item">
+            <Link to="/playlist">Play List</Link>
+          </li>
 
-        <ul className="nav-links">
-          <Link to="/SignUp">Sign Up</Link>
+          <li className="item">
+            <Link to="/played">Played</Link>
+          </li>
+
+          <li className="item">
+            <Link to="/add" classname="btn">
+              Add
+            </Link>
+          </li>
         </ul>
       </nav>
     );
