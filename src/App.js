@@ -1,13 +1,13 @@
-import React, { Component } from "react";
-import "./App.css";
-import LandingPage from "./LandingPage/LandingPage";
-import Nav from "./Nav/Nav";
+import React from "react";
+
+import LandingPage from "./components/LandingPage";
+import Nav from "./components/Nav";
 
 import { Route, Switch } from "react-router-dom";
 
-import { Playlist } from "./Playlist.js";
-import { Played } from "./Played.js";
-import { Add } from "./Add.js";
+import { Playlist } from "./components/Playlist.js";
+import { Played } from "./components/Played.js";
+import Add from "./components/Add.js";
 
 function App() {
   return (
