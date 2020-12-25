@@ -5,7 +5,7 @@ import Nav from "./components/Nav";
 
 import { Route, Switch } from "react-router-dom";
 
-import { Playlist } from "./components/Playlist.js";
+import { PlayList } from "./components/PlayList.js";
 import { Played } from "./components/Played.js";
 import Add from "./components/Add.js";
 
@@ -19,7 +19,7 @@ function App() {
             <Route exact path="/" component={LandingPage} />
             <Route path="/played" component={Played} />
             <Route path="/add" component={Add} />
-            <Route path="/playlist" component={Playlist} />
+            <Route path="/playlist" component={PlayList} />
           </Switch>
         </main>
       </div>
