@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Game from "./components/Game.js";
 
 const PlayList = () => {
   const [games, SetGames] = useState([
@@ -64,8 +65,8 @@ const PlayList = () => {
 
   return (
     <div>
-      {games.map((games) => (
-        <li>{games.name}</li>
+      {games.map((game) => (
+        <Game name={game.name} status={game.status} platform={game.platform} />
       ))}
     </div>
   );

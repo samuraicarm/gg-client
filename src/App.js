@@ -5,7 +5,7 @@ import Nav from "./components/Nav";
 
 import { Route, Switch } from "react-router-dom";
 
-import { PlayList } from "./components/PlayList.js";
+import PlayList from "./components/PlayList";
 import { Played } from "./components/Played.js";
 import Add from "./components/Add.js";
 
