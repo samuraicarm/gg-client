@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useState, useContext } from "react";
 import Game from "./Game";
 import { GameContext } from "../context/GameContext";
 
 const PlayList = () => {
-  const [games, SetGames] = useContext(GameContext);
+  const [games, setGames] = useContext(GameContext);
 
   return (
     <div>
