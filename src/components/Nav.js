@@ -7,7 +7,7 @@ class Nav extends Component {
       <nav>
         <ul className="navlinks">
           <li className="logo">
-            <Link to="/">Logo</Link>
+            <Link to="/">Good Games</Link>
           </li>
 
           <li className="item">

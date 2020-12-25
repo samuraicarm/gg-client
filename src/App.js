@@ -8,22 +8,25 @@ import { Route, Switch } from "react-router-dom";
 import PlayList from "./components/PlayList";
 import { Played } from "./components/Played.js";
 import Add from "./components/Add.js";
+import { GameProvider } from "./context/GameContext";
 
 function App() {
   return (
-    <div class="container">
-      <div className="App">
-        <Nav />
-        <main>
-          <Switch>
-            <Route exact path="/" component={LandingPage} />
-            <Route path="/played" component={Played} />
-            <Route path="/add" component={Add} />
-            <Route path="/playlist" component={PlayList} />
-          </Switch>
-        </main>
+    <GameProvider>
+      <div class="container">
+        <div className="App">
+          <Nav />
+          <main>
+            <Switch>
+              <Route exact path="/" component={LandingPage} />
+              <Route path="/played" component={Played} />
+              <Route path="/add" component={Add} />
+              <Route path="/playlist" component={PlayList} />
+            </Switch>
+          </main>
+        </div>
       </div>
-    </div>
+    </GameProvider>
   );
 }
 
