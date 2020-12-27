@@ -5,7 +5,7 @@ class SignUp extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: {
+      username: {
         value: "",
         touched: false,
       },
@@ -20,8 +20,8 @@ class SignUp extends Component {
     };
   }
 
-  updateName(name) {
-    this.setState({ name: { value: name, touched: true } });
+  updateUsername(username) {
+    this.setState({ username: { value: username, touched: true } });
   }
 
   updatePassword(password) {
@@ -41,19 +41,19 @@ class SignUp extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    const { name, password, repeatPassword } = this.state;
+    const { username, password, repeatPassword } = this.state;
 
-    console.log("Name: ", name.value);
+    console.log("Username: ", username.value);
     console.log("Password: ", password.value);
     console.log("Repeat Password: ", repeatPassword.value);
   }
 
-  validateName() {
-    const name = this.state.name.value.trim();
-    if (name.length === 0) {
-      return "Name is required";
-    } else if (name.length < 3) {
-      return "Name must be at least 3 characters long";
+  validateUsername() {
+    const username = this.state.username.value.trim();
+    if (username.length === 0) {
+      return "Username is required";
+    } else if (username.length < 3) {
+      return "Username must be at least 3 characters long";
     }
   }
 
@@ -78,47 +78,49 @@ class SignUp extends Component {
   }
 
   render() {
-    const nameError = this.validateName();
+    const usernameError = this.validateUsername();
     const passwordError = this.validatePassword();
     const repeatPasswordError = this.validateRepeatPassword();
 
     return (
-      <form className="registration" onSubmit={(e) => this.handleSubmit(e)}>
+      <form classUsername="registration" onSubmit={(e) => this.handleSubmit(e)}>
         <h2>Register</h2>
-        <div className="registration__hint">* required field</div>
-        <div className="form-group">
-          <label htmlFor="name">Name *</label>
+        <div classUsername="registration__hint">* required field</div>
+        <div classUsername="form-group">
+          <label htmlFor="username">Username *</label>
           <input
             type="text"
-            className="registration__control"
-            name="name"
-            id="name"
-            onChange={(e) => this.updateName(e.target.value)}
+            classUsername="registration__control"
+            username="username"
+            id="username"
+            onChange={(e) => this.updateUsername(e.target.value)}
           />
-          {this.state.name.touched && <ValidationError message={nameError} />}
+          {this.state.username.touched && (
+            <ValidationError message={usernameError} />
+          )}
         </div>
-        <div className="form-group">
+        <div classUsername="form-group">
           <label htmlFor="password">Password *</label>
           <input
             type="password"
-            className="registration__control"
-            name="password"
+            classUsername="registration__control"
+            username="password"
             id="password"
             onChange={(e) => this.updatePassword(e.target.value)}
           />
-          <div className="registration__hint">
+          <div classUsername="registration__hint">
             6 to 72 characters, must include a number
           </div>
           {this.state.password.touched && (
             <ValidationError message={passwordError} />
           )}
         </div>
-        <div className="form-group">
+        <div classUsername="form-group">
           <label htmlFor="repeatPassword">Repeat Password *</label>
           <input
             type="password"
-            className="registration__control"
-            name="repeatPassword"
+            classUsername="registration__control"
+            username="repeatPassword"
             id="repeatPassword"
             onChange={(e) => this.updateRepeatPassword(e.target.value)}
           />
@@ -127,15 +129,15 @@ class SignUp extends Component {
           )}
         </div>
 
-        <div className="registration__button__group">
-          <button type="reset" className="registration__button">
+        <div classUsername="registration__button__group">
+          <button type="reset" classUsername="registration__button">
             Cancel
           </button>
           <button
             type="submit"
-            className="registration__button"
+            classUsername="registration__button"
             disabled={
-              this.validateName() ||
+              this.validateUsername() ||
               this.validatePassword() ||
               this.validateRepeatPassword()
             }
