@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 
 import LandingPage from "./components/LandingPage";
 import Nav from "./components/Nav";
@@ -6,28 +6,113 @@ import Nav from "./components/Nav";
 import { Route, Switch } from "react-router-dom";
 
 import PlayList from "./components/PlayList";
-import { Played } from "./components/Played.js";
+import Played from "./components/Played.js";
 import Add from "./components/Add.js";
-import { GameProvider } from "./context/GameContext";
+import GameContext from "./context/GameContext";
 
-function App() {
-  return (
-    <GameProvider>
-      <div class="container">
-        <div className="App">
-          <Nav />
-          <main>
-            <Switch>
-              <Route exact path="/" component={LandingPage} />
-              <Route path="/played" component={Played} />
-              <Route path="/add" component={Add} />
-              <Route path="/playlist" component={PlayList} />
-            </Switch>
-          </main>
+class App extends Component {
+  state = {
+    games: [
+      {
+        id: 1,
+        name: "Among Trees",
+        status: "Play List",
+        img: "https://dummyimage.com/300",
+        platform: "PC",
+      },
+
+      {
+        id: 2,
+        name: "What Remains of Edith Finch",
+        status: "Played",
+        img: "https://dummyimage.com/300",
+        platform: "Switch",
+      },
+
+      {
+        id: 3,
+        name: "Zelda: Breath of the Wild",
+        status: "Play List",
+        img: "https://dummyimage.com/300",
+        platform: "Switch",
+      },
+      {
+        id: 4,
+        name: "The Gardens Between",
+        status: "Played",
+        img: "https://dummyimage.com/300",
+        platform: "iPhone",
+      },
+
+      {
+        id: 5,
+        name: "The Last Campfire",
+        status: "Play List",
+        img: "https://dummyimage.com/300",
+        platform: "Switch",
+      },
+
+      {
+        id: 6,
+        game: "CyberPunk2077",
+        status: "Play List",
+        img: "https://dummyimage.com/300",
+        platform: "Xbox",
+      },
+      {
+        id: 7,
+        game: "Call of Duty: Black Ops Cold War",
+        status: "Play List",
+        img: "https://dummyimage.com/300",
+        platform: "Playstation",
+      },
+    ],
+    error: null,
+  };
+
+  setGames = (games) => {
+    this.setState({
+      games,
+      error: null,
+    });
+  };
+
+  addGame = (game) => {
+    this.setState({
+      games: [...this.state.games, game],
+    });
+  };
+
+  deleteGame = (id) => {
+    this.setState((games) => {
+      return games.filter((games) => games.id !== id);
+    });
+  };
+
+  render() {
+    const contextValue = {
+      games: this.state.games,
+      addGame: this.addGame,
+    };
+
+    return (
+      <GameContext.Provider value={contextValue}>
+        <div class="container">
+          <div className="App">
+            <Nav />
+            <div className="content" aria-live="polite"></div>
+            <main>
+              <Switch>
+                <Route exact path="/" component={LandingPage} />
+                <Route path="/played" component={Played} />
+                <Route path="/add" component={Add} />
+                <Route path="/playlist" component={PlayList} />
+              </Switch>
+            </main>
+          </div>
         </div>
-      </div>
-    </GameProvider>
-  );
+      </GameContext.Provider>
+    );
+  }
 }
-
 export default App;

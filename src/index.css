@@ -9,40 +9,16 @@ body {
   color: #222;
 }
 
+/*container */
+
 .container {
+  max-width: 1000px;
+  margin: 0 auto;
   display: flex;
-  min-height: 100vh;
+  flex-direction: column;
 }
 
-img {
-  max-width: 100%;
-  height: auto;
-  padding: 2px;
-  border-radius: 20px;
-}
-
-p {
-  color: blue;
-}
-
-.intro {
-  height: 300px;
-  border: solid 2px black;
-}
-
-.card {
-  text-align: center;
-  padding: 10px;
-  width: 300px
-}
-
-.intro h1 {
-  text-align: center;
-}
-
-.intro h2 {
-  text-align: center;
-}
+/*navigation */
 
 .navlinks {
   display: flex;
@@ -57,51 +33,43 @@ p {
   padding: 15px 5px;
 }
 
-.add-content {
-  padding: 50px 0;
-  margin: 0 auto;
-}
+/*landing page */
 
-.add-content .input-wrapper input {
-  width: 100%;
-  border: solid 1px;
-}
-
-.played {
-  padding: 50px 0;
-  margin: 0 auto;
-}
-
-.btn {
-  padding: 10px 15px;
-  background-color: #008000;
-  border-radius: 5px;
-  text-transform: uppercase;
-  font-weight: 700;
-  display: inline-block;
-  border: none;
+.intro {
+  height: 300px;
+  border: solid 2px black;
 }
 
 .game {
-  background: #ffffff;
-  border-radius: 16px;
-  border-style: solid 5px;
-  border-color: #000000;
-  padding: 16px 32px;
+  border: solid 2px black;
+  text-align: center;
+  align-items: flex-start;
+  margin-bottom: 10px;
+  margin-top: 30px;
+}
+
+.intro h1 {
+  text-align: center;
+}
+
+.intro h2 {
+  text-align: center;
+}
+
+.card {
+  text-align: center;
+  padding: 10px;
+  width: 300px
+}
+
+.info {
+  flex-grow: 1;
 }
 
 .gamelist {
-  width: auto;
-  margin: 80px auto;
-  gap: 32px;
-}
-
-.game h1 {
-  margin-top: 8px;
-}
-
-.game h4 {
-  color: #617d98;
-  font-size: 12px;
-  margin-top: 4px;
+  display: flex;
+  list-style: none;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
 }
