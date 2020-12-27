@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import ValidationError from "./ValidationError";
+import ValidationError from "./ValidationError.js";
 
 class SignUp extends Component {
   constructor(props) {
@@ -52,8 +52,8 @@ class SignUp extends Component {
     const username = this.state.username.value.trim();
     if (username.length === 0) {
       return "Username is required";
-    } else if (username.length < 3) {
-      return "Username must be at least 3 characters long";
+    } else if (username.length < 8) {
+      return "Username must be at least 8 characters long";
     }
   }
 
@@ -83,69 +83,75 @@ class SignUp extends Component {
     const repeatPasswordError = this.validateRepeatPassword();
 
     return (
-      <form classUsername="registration" onSubmit={(e) => this.handleSubmit(e)}>
-        <h2>Register</h2>
-        <div classUsername="registration__hint">* required field</div>
-        <div classUsername="form-group">
-          <label htmlFor="username">Username *</label>
-          <input
-            type="text"
-            classUsername="registration__control"
-            username="username"
-            id="username"
-            onChange={(e) => this.updateUsername(e.target.value)}
-          />
-          {this.state.username.touched && (
-            <ValidationError message={usernameError} />
-          )}
-        </div>
-        <div classUsername="form-group">
-          <label htmlFor="password">Password *</label>
-          <input
-            type="password"
-            classUsername="registration__control"
-            username="password"
-            id="password"
-            onChange={(e) => this.updatePassword(e.target.value)}
-          />
-          <div classUsername="registration__hint">
-            6 to 72 characters, must include a number
+      <div className="container">
+        <form
+          classUsername="registration"
+          onSubmit={(e) => this.handleSubmit(e)}
+        >
+          <h2>Sign Up for Good Games</h2>
+          <p>Use the form below to create an account to use Good Games</p>
+          <div classUsername="registration__hint">* required field</div>
+          <div classUsername="form-group">
+            <label htmlFor="username">Username *</label>
+            <input
+              type="text"
+              classUsername="registration__control"
+              username="username"
+              id="username"
+              onChange={(e) => this.updateUsername(e.target.value)}
+            />
+            {this.state.username.touched && (
+              <ValidationError message={usernameError} />
+            )}
           </div>
-          {this.state.password.touched && (
-            <ValidationError message={passwordError} />
-          )}
-        </div>
-        <div classUsername="form-group">
-          <label htmlFor="repeatPassword">Repeat Password *</label>
-          <input
-            type="password"
-            classUsername="registration__control"
-            username="repeatPassword"
-            id="repeatPassword"
-            onChange={(e) => this.updateRepeatPassword(e.target.value)}
-          />
-          {this.state.repeatPassword.touched && (
-            <ValidationError message={repeatPasswordError} />
-          )}
-        </div>
+          <div classUsername="form-group">
+            <label htmlFor="password">Password *</label>
+            <input
+              type="password"
+              classUsername="registration__control"
+              username="password"
+              id="password"
+              onChange={(e) => this.updatePassword(e.target.value)}
+            />
+            <div classUsername="registration__hint">
+              6 to 72 characters, must include a number
+            </div>
+            {this.state.password.touched && (
+              <ValidationError message={passwordError} />
+            )}
+          </div>
+          <div classUsername="form-group">
+            <label htmlFor="repeatPassword">Repeat Password *</label>
+            <input
+              type="password"
+              classUsername="registration__control"
+              username="repeatPassword"
+              id="repeatPassword"
+              onChange={(e) => this.updateRepeatPassword(e.target.value)}
+            />
+            {this.state.repeatPassword.touched && (
+              <ValidationError message={repeatPasswordError} />
+            )}
+          </div>
 
-        <div classUsername="registration__button__group">
-          <button type="reset" classUsername="registration__button">
-            Cancel
-          </button>
-          <button
-            type="submit"
-            classUsername="registration__button"
-            disabled={
-              this.validateUsername() ||
-              this.validatePassword() ||
-              this.validateRepeatPassword()
-            }
-          >
-            Save
-          </button>
-        </div>
-      </form>
+          <div classUsername="registration__button__group">
+            <button type="reset" classUsername="registration__button">
+              Cancel
+            </button>
+            <button
+              type="submit"
+              classUsername="registration__button"
+              disabled={
+                this.validateUsername() ||
+                this.validatePassword() ||
+                this.validateRepeatPassword()
+              }
+            >
+              Save
+            </button>
+          </div>
+        </form>
+      </div>
     );
   }
 }

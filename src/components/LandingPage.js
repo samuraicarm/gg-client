@@ -8,6 +8,7 @@ class LandingPage extends Component {
           <section className="intro box1">
             <h1> This is good games</h1>
             <p>All your games in one place.</p>
+            <button>Sign up</button>
           </section>
           <section className="intro box3">
             <h2> Browse thousands of games</h2>

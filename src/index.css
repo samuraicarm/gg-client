@@ -38,6 +38,7 @@ body {
 .intro {
   height: 300px;
   border: solid 2px black;
+  text-align: center;
 }
 
 .intro h1 {
