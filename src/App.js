@@ -8,7 +8,10 @@ import { Route, Switch } from "react-router-dom";
 import PlayList from "./components/PlayList";
 import Played from "./components/Played.js";
 import Add from "./components/Add.js";
+import SignUp from "./components/SignUp";
 import GameContext from "./context/GameContext";
+
+import { gamesdata } from "./gamesdata";
 
 class App extends Component {
   state = {
@@ -32,7 +35,7 @@ class App extends Component {
       {
         id: 3,
         name: "Zelda: Breath of the Wild",
-        status: "Play List",
+        status: "Played",
         img: "https://dummyimage.com/300",
         platform: "Switch",
       },
@@ -83,16 +86,17 @@ class App extends Component {
     });
   };
 
-  deleteGame = (id) => {
-    this.setState((games) => {
-      return games.filter((games) => games.id !== id);
+  handledeleteGame = (gameId) => {
+    this.setState({
+      games: this.state.games.filter((game) => game.id !== gameId),
     });
   };
 
   render() {
     const contextValue = {
       games: this.state.games,
-      addGame: this.addGame,
+      addGame: this.state.addGame,
+      deleteGame: this.handleDeleteGame,
     };
 
     return (
@@ -107,6 +111,7 @@ class App extends Component {
                 <Route path="/played" component={Played} />
                 <Route path="/add" component={Add} />
                 <Route path="/playlist" component={PlayList} />
+                <Route path="/signup" component={SignUp} />
               </Switch>
             </main>
           </div>
@@ -115,4 +120,5 @@ class App extends Component {
     );
   }
 }
+
 export default App;

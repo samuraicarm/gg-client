@@ -10,34 +10,40 @@ class PlayList extends Component {
   static contextType = GameContext;
 
   render() {
-    const { games, deleteGame } = this.context;
-    const playlistGame = "";
+    const { games } = this.context;
+    const { gameId } = this.props.match.params;
+    const playlistGames = games.filter(
+      (games) => games.status === "Play List",
+      gameId
+    ) || { games: "" };
     return (
       <div>
         <div className="info">
           <h2> Your Play List</h2>
           <div className="count">
             {" "}
-            {playlistGame.length} {playlistGame.length === 1 ? "Game" : "Games"}{" "}
+            {playlistGames.length}{" "}
+            {playlistGames.length === 1 ? "Game" : "Games"}{" "}
           </div>
-          <div className="gamelist">
-            {games
-              .filter((games) => games.status === "Play List")
-              .map((playlistGame) => (
+          {playlistGames.length > 0 ? (
+            <div className="gamelist">
+              {playlistGames.map((game) => (
                 <li>
                   <Game
-                    name={playlistGame.name}
-                    img={playlistGame.img}
-                    status={playlistGame.status}
-                    platform={playlistGame.platform}
-                    key={playlistGame.id}
+                    name={game.name}
+                    img={game.img}
+                    status={game.status}
+                    platform={game.platform}
+                    key={game.id}
                   />
-                  <button onClick={() => deleteGame(playlistGame.id)}>
-                    Remove
-                  </button>
+                  <button>Remove</button>
+                  <button>Mark As Played</button>
                 </li>
               ))}
-          </div>
+            </div>
+          ) : (
+            <h2> No games on your list </h2>
+          )}
         </div>
       </div>
     );

@@ -15,6 +15,7 @@ class Add extends Component {
 
     return (
       <div>
+        <h2> Search for games to add to your play list.</h2>
         <form className="search">
           <input value="" type="text" />
           <input type="submit" value="Search" />

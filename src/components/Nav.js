@@ -23,6 +23,12 @@ class Nav extends Component {
               Add
             </Link>
           </li>
+
+          <li className="item">
+            <Link to="/signup" classname="btn">
+              Sign Up
+            </Link>
+          </li>
         </ul>
       </nav>
     );

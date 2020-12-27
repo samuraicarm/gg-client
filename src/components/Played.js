@@ -11,30 +11,32 @@ class Played extends Component {
 
   render() {
     const { games } = this.context;
-    const playedGames = "";
+    const playedGames = games.filter((games) => games.status === "Played");
     return (
       <div>
-        <h2> Your Played List</h2>
-        <div className="count">
-          {" "}
-          {playedGames.length} {playedGames.length === 1 ? "Game" : "Games"}{" "}
-        </div>
-        <div>
-          <div className="gamelist">
-            {games
-              .filter((games) => games.status === "Played")
-              .map((playedGames) => (
+        <div className="info">
+          <h2> Your Played List</h2>
+          <div className="count">
+            {" "}
+            {playedGames.length} {playedGames.length === 1 ? "Game" : "Games"}{" "}
+          </div>
+          {playedGames.length > 0 ? (
+            <div className="gamelist">
+              {playedGames.map((game) => (
                 <li>
                   <Game
-                    name={playedGames.name}
-                    img={playedGames.img}
-                    status={playedGames.status}
-                    platform={playedGames.platform}
-                    key={playedGames.id}
+                    name={game.name}
+                    img={game.img}
+                    status={game.status}
+                    platform={game.platform}
+                    key={game.id}
                   />
                 </li>
               ))}
-          </div>
+            </div>
+          ) : (
+            <h2>No played games.</h2>
+          )}
         </div>
       </div>
     );
