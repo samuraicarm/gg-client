@@ -30,6 +30,9 @@ class Played extends Component {
                     status={game.status}
                     platform={game.platform}
                     key={game.id}
+                    onDeleteGame={this.context.onDeleteGame}
+                    onFavoriteGame={this.context.onFavoriteGame}
+                    onPlayedGame={this.context.onPlayedGame}
                   />
                 </li>
               ))}

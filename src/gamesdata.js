@@ -40,14 +40,14 @@ export const gamesdata = [
 
   {
     id: 6,
-    game: "CyberPunk2077",
+    name: "CyberPunk2077",
     status: "Play List",
     img: "https://dummyimage.com/300",
     platform: "Xbox",
   },
   {
     id: 7,
-    game: "Call of Duty: Black Ops Cold War",
+    name: "Call of Duty: Black Ops Cold War",
     status: "Play List",
     img: "https://dummyimage.com/300",
     platform: "Playstation",

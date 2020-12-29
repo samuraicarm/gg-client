@@ -2,6 +2,7 @@ import React, { Component } from "react";
 
 import LandingPage from "./components/LandingPage";
 import Nav from "./components/Nav";
+import Login from "./components/Login";
 
 import { Route, Switch } from "react-router-dom";
 
@@ -14,64 +15,17 @@ import GameContext from "./context/GameContext";
 import { gamesdata } from "./gamesdata";
 
 class App extends Component {
-  state = {
-    games: [
-      {
-        id: 1,
-        name: "Among Trees",
-        status: "Play List",
-        img: "https://dummyimage.com/300",
-        platform: "PC",
-      },
-
-      {
-        id: 2,
-        name: "What Remains of Edith Finch",
-        status: "Played",
-        img: "https://dummyimage.com/300",
-        platform: "Switch",
-      },
-
-      {
-        id: 3,
-        name: "Zelda: Breath of the Wild",
-        status: "Played",
-        img: "https://dummyimage.com/300",
-        platform: "Switch",
-      },
-      {
-        id: 4,
-        name: "The Gardens Between",
-        status: "Played",
-        img: "https://dummyimage.com/300",
-        platform: "iPhone",
-      },
-
-      {
-        id: 5,
-        name: "The Last Campfire",
-        status: "Play List",
-        img: "https://dummyimage.com/300",
-        platform: "Switch",
-      },
-
-      {
-        id: 6,
-        name: "CyberPunk2077",
-        status: "Play List",
-        img: "https://dummyimage.com/300",
-        platform: "Xbox",
-      },
-      {
-        id: 7,
-        name: "Call of Duty: Black Ops Cold War",
-        status: "Play List",
-        img: "https://dummyimage.com/300",
-        platform: "Playstation",
-      },
-    ],
-    error: null,
-  };
+  constructor() {
+    super();
+    this.state = {
+      games: gamesdata,
+      error: null,
+      user: null,
+      tags: [],
+      favorite: false,
+      played: true,
+    };
+  }
 
   setGames = (games) => {
     this.setState({
@@ -86,17 +40,42 @@ class App extends Component {
     });
   };
 
-  handledeleteGame = (gameId) => {
+  deleteGame = (id) => {
     this.setState({
-      games: this.state.games.filter((game) => game.id !== gameId),
+      games: this.state.games.filter((game) => game.id !== id),
     });
+  };
+
+  addtag = () => {
+    this.setState({
+      tags: [],
+    });
+  };
+
+  favoriteGame = () => {
+    this.setState({
+      favorite: false,
+    });
+  };
+
+  playedGame = () => {
+    this.setState({
+      played: true,
+    });
+  };
+
+  loginUser = (email, password) => {
+    this.setState({ user: { email, password } });
   };
 
   render() {
     const contextValue = {
       games: this.state.games,
-      addGame: this.state.addGame,
-      deleteGame: this.handleDeleteGame,
+      addGame: this.addGame,
+      deleteGame: this.deleteGame,
+      addtag: this.addtag,
+      favoriteGame: this.favoriteGame,
+      playedGame: this.playedGame,
     };
 
     return (
@@ -110,8 +89,15 @@ class App extends Component {
                 <Route exact path="/" component={LandingPage} />
                 <Route path="/played" component={Played} />
                 <Route path="/add" component={Add} />
-                <Route path="/playlist" component={PlayList} />
+                <Route
+                  path="/playlist"
+                  component={PlayList}
+                  onFavoriteGame={this.favoriteGame}
+                  onDeleteGame={this.deleteGame}
+                  onPlayedGame={this.playedGame}
+                />
                 <Route path="/signup" component={SignUp} />
+                <Route path="/login" component={Login} />
               </Switch>
             </main>
           </div>

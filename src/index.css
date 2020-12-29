@@ -65,3 +65,28 @@ body {
   margin-bottom: 10px;
   margin-top: 30px;
 }
+
+.favorite {
+  position: 'absolute';
+  top: 10;
+  right: 10,
+}
+
+.taglist {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  max-width: 250px;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  background-color: rgba(0, 0, 0, 0.25);
+}
+
+.modal_content {
+  background-color: white;
+  position: absolute;
+}

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import ValidationError from "./ValidationError.js";
+import { Link } from "react-router-dom";
 
 class SignUp extends Component {
   constructor(props) {
@@ -151,6 +152,10 @@ class SignUp extends Component {
             </button>
           </div>
         </form>
+        <p>
+          Already have a Good Games account?
+          <Link to="/login">Login here.</Link>
+        </p>
       </div>
     );
   }

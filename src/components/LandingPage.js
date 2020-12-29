@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
 class LandingPage extends Component {
   render() {
@@ -8,7 +9,12 @@ class LandingPage extends Component {
           <section className="intro box1">
             <h1> This is good games</h1>
             <p>All your games in one place.</p>
-            <button>Sign up</button>
+            <Link to="/signup">
+              <button>Sign up</button>
+            </Link>
+            <Link to="/login">
+              <button>Login</button>
+            </Link>
           </section>
           <section className="intro box3">
             <h2> Browse thousands of games</h2>

@@ -5,16 +5,15 @@ import GameContext from "../context/GameContext";
 class PlayList extends Component {
   static defaultProps = {
     games: [],
+    favorite: false,
   };
 
   static contextType = GameContext;
 
   render() {
     const { games } = this.context;
-    const { gameId } = this.props.match.params;
     const playlistGames = games.filter(
-      (games) => games.status === "Play List",
-      gameId
+      (games) => games.status === "Play List"
     ) || { games: "" };
     return (
       <div>
@@ -36,8 +35,6 @@ class PlayList extends Component {
                     platform={game.platform}
                     key={game.id}
                   />
-                  <button>Remove</button>
-                  <button>Mark As Played</button>
                 </li>
               ))}
             </div>
