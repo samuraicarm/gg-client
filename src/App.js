@@ -14,19 +14,16 @@ import GameContext from "./context/GameContext";
 
 import { gamesdata } from "./gamesdata";
 
+import { API_ENDPOINT, API_KEY } from "./feconfig";
+
 class App extends Component {
   constructor() {
     super();
     this.state = {
-      games: gamesdata,
+      games: [],
       error: null,
-      user: null,
-      tags: [],
-      favorite: false,
-      played: true,
     };
   }
-
   setGames = (games) => {
     this.setState({
       games,
@@ -34,52 +31,28 @@ class App extends Component {
     });
   };
 
-  addGame = (game) => {
-    this.setState({
-      games: [...this.state.games, game],
-    });
-  };
+  componentDidMount() {
+    fetch(`${API_ENDPOINT}/api/list`, {
+      method: "GET",
+      headers: {
+        "content-type": "application/json",
+        Authorization: `Bearer ${API_KEY}`,
+      },
+    })
+      .then((res) => {
+        if (!res.ok) {
+          throw new Error(res.status);
+        }
+        return res.json();
+      })
+      .then(this.setGames)
 
-  deleteGame = (id) => {
-    this.setState({
-      games: this.state.games.filter((game) => game.id !== id),
-    });
-  };
-
-  addtag = () => {
-    this.setState({
-      tags: [],
-    });
-  };
-
-  favoriteGame = () => {
-    this.setState({
-      favorite: false,
-    });
-  };
-
-  playedGame = () => {
-    this.setState({
-      played: true,
-    });
-  };
-
-  loginUser = (email, password) => {
-    this.setState({ user: { email, password } });
-  };
+      .catch((error) => this.setState({ error }));
+  }
 
   render() {
-    const contextValue = {
-      games: this.state.games,
-      addGame: this.addGame,
-      deleteGame: this.deleteGame,
-      addtag: this.addtag,
-      favoriteGame: this.favoriteGame,
-      playedGame: this.playedGame,
-    };
-
     return (
-      <GameContext.Provider value={contextValue}>
+      <GameContext.Provider value={this.state}>
         <div class="container">
           <div className="App">
             <Nav />
