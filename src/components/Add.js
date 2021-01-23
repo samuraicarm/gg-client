@@ -1,41 +1,48 @@
 import React, { Component } from "react";
 import GameContext from "../context/GameContext";
-import { data } from "../data.js";
-import Game from "./Game";
+
+import { API_ENDPOINT, API_KEY } from "../feconfig";
 
 class Add extends Component {
   static contextType = GameContext;
 
   state = {
-    error: null,
+    search: "",
+  };
+
+  handleChange = (e) => {
+    this.setState({ search: e.target.value });
+  };
+
+  handleSubmit = (e) => {
+    e.preventDefault();
+    const search = this.state.search;
+    console.log(this.state.value);
+    fetch(`${API_ENDPOINT}/api/games?search=${search}`, {
+      method: "GET",
+      headers: {
+        "content-type": "application/json",
+        Authorization: `Bearer ${API_KEY}`,
+      },
+    })
+      .then((res) => res.json())
+      .then(console.log);
   };
 
   render() {
-    const searchGamesList = data || {};
-
     return (
       <div>
         <h2> Search for games to add to your play list.</h2>
-        <form className="search">
-          <input value="" type="text" />
-          <input type="submit" value="Search" />
+        <form onSubmit={this.handleSubmit} className="search">
+          <input
+            type="text"
+            name="query"
+            value={this.state.search}
+            onChange={this.handleChange}
+            placeholder="search G00d Games"
+          />
+          <input type="submit" value="submit" />
         </form>
-        <div className="gamelist">
-          {searchGamesList.map((game) => (
-            <li>
-              <Game
-                name={game.name}
-                img={game.img}
-                status={game.status}
-                platform={game.platform}
-                key={game.id}
-              />
-              <div className="button">
-                <button type="button">Add to Play List</button>
-              </div>
-            </li>
-          ))}
-        </div>
       </div>
     );
   }

@@ -12,9 +12,10 @@ class PlayList extends Component {
 
   render() {
     const { games } = this.context;
-    const playlistGames = games.filter(
-      (games) => games.status === "Play List"
-    ) || { games: "" };
+
+    const playlistGames = games.filter((games) => games.playlist === true) || {
+      games: "",
+    };
     return (
       <div>
         <div className="info">

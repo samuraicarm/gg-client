@@ -24,14 +24,16 @@ class App extends Component {
       error: null,
     };
   }
+
   setGames = (games) => {
+    console.log({ games });
     this.setState({
       games,
       error: null,
     });
   };
 
-  componentDidMount() {
+  loadGames() {
     fetch(`${API_ENDPOINT}/api/list`, {
       method: "GET",
       headers: {
@@ -48,6 +50,23 @@ class App extends Component {
       .then(this.setGames)
 
       .catch((error) => this.setState({ error }));
+  }
+
+  searchGames(search) {
+    fetch(`${API_ENDPOINT}/api/games?search=${search}`, {
+      method: "GET",
+      headers: {
+        "content-type": "application/json",
+        Authorization: `Bearer ${API_KEY}`,
+      },
+    })
+      .then((res) => res.json())
+      .then(console.log);
+  }
+
+  componentDidMount() {
+    this.loadGames();
+    this.searchGames("mario");
   }
 
   render() {

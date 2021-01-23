@@ -11,7 +11,7 @@ class Played extends Component {
 
   render() {
     const { games } = this.context;
-    const playedGames = games.filter((games) => games.status === "Played");
+    const playedGames = games.filter((games) => games.played === true);
     return (
       <div>
         <div className="info">
