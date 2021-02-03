@@ -6,15 +6,15 @@ import Login from "./components/Login";
 
 import { Route, Switch } from "react-router-dom";
 
-import PlayList from "./components/PlayList";
+import PlayList from "./components/Playlist";
 import Played from "./components/Played.js";
 import Add from "./components/Add.js";
 import SignUp from "./components/SignUp";
 import GameContext from "./context/GameContext";
 
-import { gamesdata } from "./gamesdata";
+//import { gamesdata } from "./gamesdata";
 
-import { API_ENDPOINT, API_KEY } from "./feconfig";
+import { API_ENDPOINT, API_KEY } from "./config";
 
 class App extends Component {
   constructor() {
@@ -30,6 +30,13 @@ class App extends Component {
     this.setState({
       games,
       error: null,
+    });
+  };
+
+  addGame = (game) => {
+    console.log({ game });
+    this.setState({
+      games: [...this.state.games, game],
     });
   };
 
@@ -52,7 +59,7 @@ class App extends Component {
       .catch((error) => this.setState({ error }));
   }
 
-  searchGames(search) {
+  /*searchGames(search) {
     fetch(`${API_ENDPOINT}/api/games?search=${search}`, {
       method: "GET",
       headers: {
@@ -63,10 +70,10 @@ class App extends Component {
       .then((res) => res.json())
       .then(console.log);
   }
+*/
 
   componentDidMount() {
     this.loadGames();
-    this.searchGames("mario");
   }
 
   render() {

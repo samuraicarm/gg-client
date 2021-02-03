@@ -1,13 +1,17 @@
 import React, { Component } from "react";
 import GameContext from "../context/GameContext";
 
-import { API_ENDPOINT, API_KEY } from "../feconfig";
+import { API_ENDPOINT, API_KEY } from "../config";
 
 class Add extends Component {
   static contextType = GameContext;
+  static defaultProps = {
+    onAddGame: () => {},
+  };
 
   state = {
     search: "",
+    results: [],
   };
 
   handleChange = (e) => {
@@ -17,7 +21,7 @@ class Add extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
     const search = this.state.search;
-    console.log(this.state.value);
+    console.log(this.state.search);
     fetch(`${API_ENDPOINT}/api/games?search=${search}`, {
       method: "GET",
       headers: {
@@ -26,7 +30,19 @@ class Add extends Component {
       },
     })
       .then((res) => res.json())
-      .then(console.log);
+      .then(console.log)
+      .then((data) => {
+        this.setState({
+          results: data,
+          error: null,
+        });
+        console.log(data);
+      })
+      .catch((error) => {
+        this.setState({
+          error: error.message,
+        });
+      });
   };
 
   render() {
@@ -43,6 +59,13 @@ class Add extends Component {
           />
           <input type="submit" value="submit" />
         </form>
+        {this.state.results.length > 0 && (
+          <ul className="results">
+            {this.state.results.map((game) => (
+              <li>{game.name}</li>
+            ))}
+          </ul>
+        )}
       </div>
     );
   }

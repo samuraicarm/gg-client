@@ -1,25 +1,40 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import AuthApiService from "../services/auth-api-service";
+import TokenService from "../services/token-service";
+/*import { API_ENDPOINT } from "../config";*/
 
 export default class App extends React.Component {
-  constructor() {
-    super();
-    this.state = {};
-  }
+  state = {
+    error: null,
+  };
 
-  submitForm = (e) => {
+  handlelogin = (e) => {
     e.preventDefault();
-    let userName = e.target.username.value;
-    let password = e.target.password.value;
-    this.props.loginUser(userName, password);
-    alert(userName);
+    const { username, userPassword } = e.target;
+    this.setState({ error: null });
+    const user = {
+      username: username.value,
+      userPassword: userPassword.value,
+    };
+    AuthApiService.loginUser(user)
+      .then((loginResponse) => {
+        TokenService.saveAuthToken(loginResponse.authToken);
+        this.props.history.push("/playlist");
+      })
+      .catch((res) => this.setState({ eror: res.error }));
   };
 
   render() {
     return (
       <div classname="container">
         <div className="login">
-          <form>
+          <form
+            className="form"
+            aria-label="login-form"
+            onSubmit={this.handlelogin}
+          >
+            {this.state.error && <p className="error">{this.state.error}</p>}
             <p>
               <input
                 type="username."
@@ -31,7 +46,7 @@ export default class App extends React.Component {
             <p>
               <input
                 type="password"
-                name="password"
+                name="userPassword"
                 placeholder="Password"
                 aria-label="password"
               />

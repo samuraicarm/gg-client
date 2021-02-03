@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import ValidationError from "./ValidationError.js";
 import { Link } from "react-router-dom";
+import authApiService from "../services/auth-api-service.js";
 
 class SignUp extends Component {
   constructor(props) {
@@ -10,7 +11,7 @@ class SignUp extends Component {
         value: "",
         touched: false,
       },
-      password: {
+      userPassword: {
         value: "",
         touched: false,
       },
@@ -21,13 +22,33 @@ class SignUp extends Component {
     };
   }
 
+  handleSubmit = (e) => {
+    e.preventDefault();
+    const { username, userPassword, repeatPassword } = e.target;
+    this.setState({ error: null });
+    authApiService
+      .postUser({
+        username: username.value,
+        userPassword: userPassword.value,
+      })
+      .then((user) => {
+        this.props.history.push("/login");
+      })
+      .catch((res) => {
+        this.setState({ error: res.error });
+      });
+    console.log("Username: ", username.value);
+    console.log("userPassword: ", userPassword.value);
+    console.log("Repeat Password: ", repeatPassword.value);
+  };
+
   updateUsername(username) {
     this.setState({ username: { value: username, touched: true } });
   }
 
-  updatePassword(password) {
+  updateUserPassword(userPassword) {
     this.setState({
-      password: { value: password, touched: true },
+      userPassword: { value: userPassword, touched: true },
     });
   }
 
@@ -40,15 +61,6 @@ class SignUp extends Component {
     });
   }
 
-  handleSubmit(event) {
-    event.preventDefault();
-    const { username, password, repeatPassword } = this.state;
-
-    console.log("Username: ", username.value);
-    console.log("Password: ", password.value);
-    console.log("Repeat Password: ", repeatPassword.value);
-  }
-
   validateUsername() {
     const username = this.state.username.value.trim();
     if (username.length === 0) {
@@ -58,76 +70,73 @@ class SignUp extends Component {
     }
   }
 
-  validatePassword() {
-    const password = this.state.password.value.trim();
-    if (password.length === 0) {
+  validateUserPassword() {
+    const userPassword = this.state.userPassword.value.trim();
+    if (userPassword.length === 0) {
       return "Password is required";
-    } else if (password.length < 6 || password.length > 72) {
+    } else if (userPassword.length < 6 || userPassword.length > 72) {
       return "Password must be between 6 and 72 characters long";
-    } else if (!password.match(/[0-9]/)) {
+    } else if (!userPassword.match(/[0-9]/)) {
       return "Password must contain at least one number";
     }
   }
 
   validateRepeatPassword() {
     const repeatPassword = this.state.repeatPassword.value.trim();
-    const password = this.state.password.value.trim();
+    const userPassword = this.state.userPassword.value.trim();
 
-    if (repeatPassword !== password) {
+    if (repeatPassword !== userPassword) {
       return "Passwords do not match";
     }
   }
 
   render() {
     const usernameError = this.validateUsername();
-    const passwordError = this.validatePassword();
+    const passwordError = this.validateUserPassword();
     const repeatPasswordError = this.validateRepeatPassword();
 
     return (
       <div className="container">
-        <form
-          classUsername="registration"
-          onSubmit={(e) => this.handleSubmit(e)}
-        >
+        <form className="registration" onSubmit={this.handleSubmit}>
           <h2>Sign Up for Good Games</h2>
           <p>Use the form below to create an account to use Good Games</p>
-          <div classUsername="registration__hint">* required field</div>
-          <div classUsername="form-group">
+          <div className="registration__hint">* required field</div>
+          <div className="form-group">
             <label htmlFor="username">Username *</label>
             <input
               type="text"
-              classUsername="registration__control"
-              username="username"
+              className="registration__control"
               id="username"
+              name="username"
               onChange={(e) => this.updateUsername(e.target.value)}
             />
             {this.state.username.touched && (
               <ValidationError message={usernameError} />
             )}
           </div>
-          <div classUsername="form-group">
+          <div className="form-group">
             <label htmlFor="password">Password *</label>
             <input
-              type="password"
-              classUsername="registration__control"
-              username="password"
-              id="password"
-              onChange={(e) => this.updatePassword(e.target.value)}
+              type="text"
+              className="registration__control"
+              id="userPassword"
+              name="userPassword"
+              onChange={(e) => this.updateUserPassword(e.target.value)}
             />
-            <div classUsername="registration__hint">
+            <div className="registration__hint">
               6 to 72 characters, must include a number
             </div>
-            {this.state.password.touched && (
+            {this.state.userPassword.touched && (
               <ValidationError message={passwordError} />
             )}
           </div>
-          <div classUsername="form-group">
+          <div className="form-group">
             <label htmlFor="repeatPassword">Repeat Password *</label>
             <input
               type="password"
-              classUsername="registration__control"
-              username="repeatPassword"
+              className="registration__control"
               id="repeatPassword"
+              name="repeatPassword"
               onChange={(e) => this.updateRepeatPassword(e.target.value)}
             />
             {this.state.repeatPassword.touched && (
@@ -135,20 +144,20 @@ class SignUp extends Component {
             )}
           </div>
 
-          <div classUsername="registration__button__group">
-            <button type="reset" classUsername="registration__button">
+          <div className="registration__button__group">
+            <button type="reset" className="registration__button">
               Cancel
             </button>
             <button
               type="submit"
-              classUsername="registration__button"
+              className="registration__button"
               disabled={
                 this.validateUsername() ||
-                this.validatePassword() ||
+                this.validateUserPassword() ||
                 this.validateRepeatPassword()
               }
             >
-              Save
+              SignUp
             </button>
           </div>
         </form>
