@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Game from "./Game";
+import { GameCard } from "./GameCard.js";
 import GameContext from "../context/GameContext";
 
 class Played extends Component {
@@ -23,17 +23,8 @@ class Played extends Component {
           {playedGames.length > 0 ? (
             <div className="gamelist">
               {playedGames.map((game) => (
-                <li>
-                  <Game
-                    name={game.name}
-                    img={game.img}
-                    status={game.status}
-                    platform={game.platform}
-                    key={game.id}
-                    onDeleteGame={this.context.onDeleteGame}
-                    onFavoriteGame={this.context.onFavoriteGame}
-                    onPlayedGame={this.context.onPlayedGame}
-                  />
+                <li key={game.id}>
+                  <GameCard game={game} onDelete={this.context.deleteGame} />
                 </li>
               ))}
             </div>

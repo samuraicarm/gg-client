@@ -1,11 +1,10 @@
 import React, { Component } from "react";
-import Game from "./Game";
+import { GameCard } from "./GameCard.js";
 import GameContext from "../context/GameContext";
 
 class PlayList extends Component {
   static defaultProps = {
     games: [],
-    favorite: false,
   };
 
   static contextType = GameContext;
@@ -28,14 +27,8 @@ class PlayList extends Component {
           {playlistGames.length > 0 ? (
             <div className="gamelist">
               {playlistGames.map((game) => (
-                <li>
-                  <Game
-                    name={game.name}
-                    img={game.img}
-                    status={game.status}
-                    platform={game.platform}
-                    key={game.id}
-                  />
+                <li key={game.id}>
+                  <GameCard game={game} onDelete={this.context.deleteGame} />
                 </li>
               ))}
             </div>

@@ -33,11 +33,52 @@ class App extends Component {
     });
   };
 
-  addGame = (game) => {
-    console.log({ game });
-    this.setState({
-      games: [...this.state.games, game],
-    });
+  addGame = (newGame) => {
+    const payload = {
+      game_id: newGame.id,
+      game_name: newGame.name,
+      game_url: newGame.cover.image_id,
+      playlist: true,
+      played: false,
+      favorite: false,
+      userid: 1,
+    };
+
+    fetch(`${API_ENDPOINT}/api/list`, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+        Authorization: `Bearer ${API_KEY}`,
+      },
+      body: JSON.stringify(payload),
+    })
+      .then((res) => res.json())
+      .then((returnedGame) => {
+        this.setState((prevState) => ({
+          games: [...prevState.games, returnedGame],
+        }));
+      });
+  };
+
+  deleteGame = (game_id) => {
+    const payload = {
+      game_id: game_id,
+    };
+
+    fetch(`${API_ENDPOINT}/api/list`, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+        Authorization: `Bearer ${API_KEY}`,
+      },
+      body: JSON.stringify(payload),
+    })
+      .then((res) => res.json())
+      .then(() => {
+        this.setState((prevState) => ({
+          games: [...prevState.games],
+        }));
+      });
   };
 
   loadGames() {
@@ -59,26 +100,19 @@ class App extends Component {
       .catch((error) => this.setState({ error }));
   }
 
-  /*searchGames(search) {
-    fetch(`${API_ENDPOINT}/api/games?search=${search}`, {
-      method: "GET",
-      headers: {
-        "content-type": "application/json",
-        Authorization: `Bearer ${API_KEY}`,
-      },
-    })
-      .then((res) => res.json())
-      .then(console.log);
-  }
-*/
-
   componentDidMount() {
     this.loadGames();
   }
 
   render() {
     return (
-      <GameContext.Provider value={this.state}>
+      <GameContext.Provider
+        value={{
+          ...this.state,
+          addGame: this.addGame.bind(this),
+          deleteGame: this.deleteGame.bind(this),
+        }}
+      >
         <div class="container">
           <div className="App">
             <Nav />

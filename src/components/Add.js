@@ -1,13 +1,10 @@
 import React, { Component } from "react";
 import GameContext from "../context/GameContext";
-
+import { ResultCard } from "./ResultCard";
 import { API_ENDPOINT, API_KEY } from "../config";
 
 class Add extends Component {
   static contextType = GameContext;
-  static defaultProps = {
-    onAddGame: () => {},
-  };
 
   state = {
     search: "",
@@ -30,7 +27,6 @@ class Add extends Component {
       },
     })
       .then((res) => res.json())
-      .then(console.log)
       .then((data) => {
         this.setState({
           results: data,
@@ -46,6 +42,7 @@ class Add extends Component {
   };
 
   render() {
+    console.log(this.context);
     return (
       <div>
         <h2> Search for games to add to your play list.</h2>
@@ -62,7 +59,9 @@ class Add extends Component {
         {this.state.results.length > 0 && (
           <ul className="results">
             {this.state.results.map((game) => (
-              <li>{game.name}</li>
+              <li key={game.id}>
+                <ResultCard game={game} onAdd={this.context.addGame} />
+              </li>
             ))}
           </ul>
         )}

@@ -90,3 +90,7 @@ body {
   background-color: white;
   position: absolute;
 }
+
+li {
+  list-style: none
+}
