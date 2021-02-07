@@ -37,7 +37,7 @@ class App extends Component {
     const payload = {
       game_id: newGame.id,
       game_name: newGame.name,
-      game_url: newGame.cover.image_id,
+      image_id: newGame.cover.image_id,
       playlist: true,
       played: false,
       favorite: false,
