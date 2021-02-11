@@ -35,7 +35,7 @@ class App extends Component {
 
   addGame = (newGame) => {
     const payload = {
-      game_id: newGame.id,
+      id: newGame.id,
       game_name: newGame.name,
       image_id: newGame.cover.image_id,
       playlist: true,
@@ -60,13 +60,58 @@ class App extends Component {
       });
   };
 
-  deleteGame = (game_id) => {
+  playedGame = (game) => {
     const payload = {
-      game_id: game_id,
+      id: game.id,
+      playlist: false,
+      played: true,
     };
 
     fetch(`${API_ENDPOINT}/api/list`, {
-      method: "POST",
+      method: "PATCH",
+      headers: {
+        "content-type": "application/json",
+        Authorization: `Bearer ${API_KEY}`,
+      },
+      body: JSON.stringify(payload),
+    })
+      .then((res) => res.json())
+      .then((returnedGame) => {
+        this.setState((prevState) => ({
+          games: [...prevState.games, returnedGame],
+        }));
+      });
+  };
+
+  favoriteGame = (game) => {
+    const payload = {
+      id: game.id,
+      favorite: true,
+    };
+
+    fetch(`${API_ENDPOINT}/api/list`, {
+      method: "PATCH",
+      headers: {
+        "content-type": "application/json",
+        Authorization: `Bearer ${API_KEY}`,
+      },
+      body: JSON.stringify(payload),
+    })
+      .then((res) => res.json())
+      .then((returnedGame) => {
+        this.setState((prevState) => ({
+          games: [...prevState.games, returnedGame],
+        }));
+      });
+  };
+
+  deleteGame = (game) => {
+    const payload = {
+      id: game.id,
+    };
+
+    fetch(`${API_ENDPOINT}/api/list`, {
+      method: "DELETE",
       headers: {
         "content-type": "application/json",
         Authorization: `Bearer ${API_KEY}`,
@@ -111,6 +156,8 @@ class App extends Component {
           ...this.state,
           addGame: this.addGame.bind(this),
           deleteGame: this.deleteGame.bind(this),
+          playedGame: this.playedGame.bind(this),
+          favoriteGame: this.favoriteGame.bind(this),
         }}
       >
         <div class="container">

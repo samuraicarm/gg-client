@@ -3,11 +3,11 @@ import { GameCard } from "./GameCard.js";
 import GameContext from "../context/GameContext";
 
 class PlayList extends Component {
-  static defaultProps = {
+  static contextType = GameContext;
+
+  state = {
     games: [],
   };
-
-  static contextType = GameContext;
 
   render() {
     const { games } = this.context;
