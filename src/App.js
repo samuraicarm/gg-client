@@ -105,11 +105,10 @@ class App extends Component {
       });
   };
 
-  deleteGame = (game) => {
+  deleteGame = (gameid) => {
     const payload = {
-      id: game.id,
+      id: gameid,
     };
-
     fetch(`${API_ENDPOINT}/api/list`, {
       method: "DELETE",
       headers: {
@@ -169,13 +168,7 @@ class App extends Component {
                 <Route exact path="/" component={LandingPage} />
                 <Route path="/played" component={Played} />
                 <Route path="/add" component={Add} />
-                <Route
-                  path="/playlist"
-                  component={PlayList}
-                  onFavoriteGame={this.favoriteGame}
-                  onDeleteGame={this.deleteGame}
-                  onPlayedGame={this.playedGame}
-                />
+                <Route path="/playlist" component={PlayList} />
                 <Route path="/signup" component={SignUp} />
                 <Route path="/login" component={Login} />
               </Switch>

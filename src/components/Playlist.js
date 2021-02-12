@@ -28,7 +28,11 @@ class PlayList extends Component {
             <div className="gamelist">
               {playlistGames.map((game) => (
                 <li key={game.id}>
-                  <GameCard game={game} onDelete={this.context.deleteGame} />
+                  <GameCard
+                    game={game}
+                    match={{ params: { gameid: game.id } }}
+                    onDelete={this.context.deleteGame}
+                  />
                 </li>
               ))}
             </div>
